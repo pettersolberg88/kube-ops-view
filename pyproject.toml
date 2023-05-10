@@ -6,7 +6,7 @@ description = "Kubernetes Operational View - read-only system dashboard for mult
 authors = ["Henning Jacobs <henning@jacobs1.de>"]
 
 [tool.poetry.dependencies]
-python = ">=3.10,<4"
+python = ">=3.11,<4"
 click = "*"
 flask = "*"
 flask-dance = "*"

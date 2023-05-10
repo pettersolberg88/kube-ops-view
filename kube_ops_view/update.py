@@ -89,7 +89,7 @@ def update_clusters(
                             # https://pikacode.com/phijaro/json_delta/ticket/11/
                             # diff is extremely slow without array_align=False
                             delta = json_delta.diff(
-                                old_data, data, verbose=debug, array_align=False
+                                old_data, data, verbose=debug, array_align=False, compare_lengths=False
                             )
                             store.publish(
                                 "clusterdelta",
@@ -116,5 +116,5 @@ def update_clusters(
                 logger.exception(f"Failed to update: {e}")
             finally:
                 store.release_lock(lock)
-        # sleep 1-2 seconds
-        gevent.sleep(min(random_jitter(1), query_interval))
+        # sleep 2-3 seconds
+        gevent.sleep(min(random_jitter(2), query_interval))
