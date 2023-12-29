@@ -1,6 +1,7 @@
 var path = require('path'),
     webpack = require('webpack'),
     pkg = require('./package.json'),
+    ESLintPlugin = require('eslint-webpack-plugin');
     DEBUG = process.env.NODE_ENV !== 'production',
     entry = [
         './src/app.js',
@@ -25,6 +26,7 @@ module.exports = {
         new webpack.LoaderOptionsPlugin({
             debug: DEBUG
         }),
+        new ESLintPlugin({}),
         new webpack.ProvidePlugin({
             process: 'process/browser',
         }),
@@ -32,9 +34,7 @@ module.exports = {
     module: {
 
         rules: [
-            {enforce: 'pre', test: /\.js$/, loader: 'eslint-loader', exclude: /node_modules/},
             {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
-            //{test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader', options: {plugins: ['transform-runtime'], presets: ['es2015']}},
             {test: /\.html$/, exclude: /node_modules/, loader: 'file-loader', options: { name: '[path][name].[ext]'}},
             {test: /\.jpe?g$|\.svg$|\.png$/, exclude: /node_modules/, loader: 'file-loader',options: { name: '[path][name].[ext]'}},
             {test: /\.json$/, exclude: /node_modules/, loader: 'json'},
