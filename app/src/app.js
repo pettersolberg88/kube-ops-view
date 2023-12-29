@@ -341,7 +341,7 @@ export default class App {
         searchPrompt.x = 26
         searchPrompt.y = 8
         PIXI.ticker.shared.add(function (_) {
-            var v = Math.sin((PIXI.ticker.shared.lastTime % 2000) / 2000. * Math.PI)
+            var v = Math.sin((PIXI.ticker.shared.lastTime % 2000) / 2000.0 * Math.PI)
             searchPrompt.alpha = v
         })
         this.stage.addChild(searchPrompt)
