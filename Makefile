@@ -26,12 +26,13 @@ version:
 	sed -i "s/kube-ops-view:.*/kube-ops-view:$(VERSION)/" deploy/*.yaml
 
 appjs:
-	docker run $(TTYFLAGS) -u $$(id -u) -v $$(pwd):/workdir -w /workdir/app -e NPM_CONFIG_CACHE=/tmp node:14.0-slim npm install
-	docker run $(TTYFLAGS) -u $$(id -u) -v $$(pwd):/workdir -w /workdir/app -e NPM_CONFIG_CACHE=/tmp node:14.0-slim npm run build
+	docker run $(TTYFLAGS) -u $$(id -u) -v $$(pwd):/workdir -w /workdir/app -e NPM_CONFIG_CACHE=/tmp node:16-slim npm install
+	docker run $(TTYFLAGS) -u $$(id -u) -v $$(pwd):/workdir -w /workdir/app -e NPM_CONFIG_CACHE=/tmp node:16-slim npm run build
 
 docker: appjs
 	docker build --build-arg "VERSION=$(VERSION)" -t "$(IMAGE):$(TAG)" .
 	@echo 'Docker image $(IMAGE):$(TAG) can now be used.'
+	 docker run -e MOCK=true --network host $(IMAGE):$(TAG)
 
 docker-arm: appjs
 	docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
