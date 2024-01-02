@@ -21,7 +21,6 @@ export default class App {
         this.config.nodeLinkUrlTemplate = config['node_link_url_template']
         this.config.podLinkUrlTemplate = config['pod_link_url_template']
         this.config.route_prefix = config['route_prefix']
-
         this.filterString = (params.get('q') && decodeURIComponent(params.get('q'))) || ''
         this.selectedClusters = new Set((params.get('clusters') || '').split(',').filter(x => x))
         this.seenPods = new Set()
@@ -289,7 +288,7 @@ export default class App {
         addEventListener('touchend', touchEndHandler.bind(this), false)
 
         const that = this
-        const interactionObj = new PIXI.interaction.InteractionData()
+        const interactionObj = new PIXI.InteractionData()
 
         function getLocalCoordinates(x, y) {
             return interactionObj.getLocalPosition(that.viewContainer, undefined, {x: x, y: y})
@@ -340,8 +339,12 @@ export default class App {
         })
         searchPrompt.x = 26
         searchPrompt.y = 8
-        PIXI.ticker.shared.add(function (_) {
-            var v = Math.sin((PIXI.ticker.shared.lastTime % 2000) / 2000. * Math.PI)
+        console.log('PETTER')
+        console.log(PIXI)
+        console.log(PIXI.Ticker)
+        console.log(PIXI.Ticker.shared)
+        PIXI.Ticker.shared.add(function (_) {
+            var v = Math.sin((PIXI.Ticker.shared.lastTime % 2000) / 2000. * Math.PI)
             searchPrompt.alpha = v
         })
         this.stage.addChild(searchPrompt)
@@ -435,13 +438,13 @@ export default class App {
             // blur.blur = (1 - alpha) * 20
             pod.scale.set(scale)
             if (progress >= 1) {
-                PIXI.ticker.shared.remove(tick)
+                PIXI.Ticker.shared.remove(tick)
                 that.stage.removeChild(pod)
                 pod.destroy()
                 originalPod.visible = true
             }
         }
-        PIXI.ticker.shared.add(tick)
+        PIXI.Ticker.shared.add(tick)
         this.stage.addChild(pod)
     }
 
@@ -467,12 +470,12 @@ export default class App {
             pod.position.set(globalCenter.x - pod.width / 2, globalCenter.y - pod.height / 2)
 
             if (progress <= 0) {
-                PIXI.ticker.shared.remove(tick)
+                PIXI.Ticker.shared.remove(tick)
                 that.stage.removeChild(pod)
                 pod.destroy()
             }
         }
-        PIXI.ticker.shared.add(tick)
+        PIXI.Ticker.shared.add(tick)
         this.stage.addChild(pod)
     }
 
@@ -723,7 +726,7 @@ export default class App {
         this.draw()
         this.connect()
 
-        PIXI.ticker.shared.add(this.tick, this)
+        PIXI.Ticker.shared.add(this.tick, this)
     }
 }
 

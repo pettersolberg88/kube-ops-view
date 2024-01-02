@@ -115,7 +115,7 @@ class CRTTheme extends DefaultTheme {
 
         stage.filters = [filter]
         this.filter = filter
-        PIXI.ticker.shared.add(this.animate, this)
+        PIXI.Ticker.shared.add(this.animate, this)
     }
 
     animate(_delta) {

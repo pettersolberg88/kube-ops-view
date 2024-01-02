@@ -98,9 +98,9 @@ export class Pod extends PIXI.Graphics {
 
     destroy() {
         if (this.tick) {
-            PIXI.ticker.shared.remove(this.tick, this)
+            PIXI.Ticker.shared.remove(this.tick, this)
         }
-        PIXI.ticker.shared.remove(this.animateMove, this)
+        PIXI.Ticker.shared.remove(this.animateMove, this)
         super.destroy()
     }
 
@@ -109,7 +109,7 @@ export class Pod extends PIXI.Graphics {
         const deltaY = this._targetPosition.y - this.position.y
         if (Math.abs(deltaX) < 2 && Math.abs(deltaY) < 2) {
             this.position = this._targetPosition
-            PIXI.ticker.shared.remove(this.animateMove, this)
+            PIXI.Ticker.shared.remove(this.animateMove, this)
         } else {
             if (Math.abs(deltaX) > time) {
                 this.position.x += time * Math.sign(deltaX)
@@ -127,7 +127,7 @@ export class Pod extends PIXI.Graphics {
         } else if (!this._targetPosition.equals(targetPosition)) {
             // animate moving to new position
             this._targetPosition = targetPosition
-            PIXI.ticker.shared.add(this.animateMove, this)
+            PIXI.Ticker.shared.add(this.animateMove, this)
         }
     }
 
@@ -170,17 +170,17 @@ export class Pod extends PIXI.Graphics {
     }
 
     pulsate(_time) {
-        const v = Math.sin((PIXI.ticker.shared.lastTime % 1000) / 1000. * Math.PI)
+        const v = Math.sin((PIXI.Ticker.shared.lastTime % 1000) / 1000. * Math.PI)
         this.alpha = v * this._progress
     }
 
     crashing(_time) {
-        const v = Math.sin((PIXI.ticker.shared.lastTime % 1000) / 1000. * Math.PI)
+        const v = Math.sin((PIXI.Ticker.shared.lastTime % 1000) / 1000. * Math.PI)
         this.tint = PIXI.utils.rgb2hex([1, v, v])
     }
 
     terminating(_time) {
-        const v = Math.sin(((1000 + PIXI.ticker.shared.lastTime) % 1000) / 1000. * Math.PI)
+        const v = Math.sin(((1000 + PIXI.Ticker.shared.lastTime) % 1000) / 1000. * Math.PI)
         this.cross.alpha = v
     }
 
@@ -313,9 +313,9 @@ export class Pod extends PIXI.Graphics {
             this.tick = newTick
             // important: only register new listener if it does not exist yet!
             // (otherwise we leak listeners)
-            PIXI.ticker.shared.add(this.tick, this)
+            PIXI.Ticker.shared.add(this.tick, this)
         } else if (!newTick && this.tick) {
-            PIXI.ticker.shared.remove(this.tick, this)
+            PIXI.Ticker.shared.remove(this.tick, this)
             this.tick = null
             this.alpha = this._progress
             this.tint = 0xffffff
