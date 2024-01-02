@@ -31,7 +31,7 @@
     "@pixi/filter-crt": "^2.7.0",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
-    "pixi.js": "^4.8.9"
+    "pixi.js": "^7.3.2"
   },
   "babel": {
     "presets": [
@@ -46,7 +46,7 @@
     "eslint": "^8.56.0",
     "eslint-webpack-plugin": "^4.0.1",
     "path": "^0.12.7",
-    "rimraf": "^3.0.2",
+    "rimraf": "^5.0.5",
     "transform-loader": "^0.2.4",
     "url": "^0.11.3",
     "webpack": "^5.89.0",
