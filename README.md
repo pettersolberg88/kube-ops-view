@@ -1,4 +1,3 @@
-
 Kubernetes Operational View
 ===========================
 
