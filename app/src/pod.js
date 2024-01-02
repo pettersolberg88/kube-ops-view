@@ -170,17 +170,17 @@ export class Pod extends PIXI.Graphics {
     }
 
     pulsate(_time) {
-        const v = Math.sin((PIXI.Ticker.shared.lastTime % 1000) / 1000. * Math.PI)
+        const v = Math.sin((PIXI.Ticker.shared.lastTime % 1000) / 1000.0 * Math.PI)
         this.alpha = v * this._progress
     }
 
     crashing(_time) {
-        const v = Math.sin((PIXI.Ticker.shared.lastTime % 1000) / 1000. * Math.PI)
+        const v = Math.sin((PIXI.Ticker.shared.lastTime % 1000) / 1000.0 * Math.PI)
         this.tint = PIXI.utils.rgb2hex([1, v, v])
     }
 
     terminating(_time) {
-        const v = Math.sin(((1000 + PIXI.Ticker.shared.lastTime) % 1000) / 1000. * Math.PI)
+        const v = Math.sin(((1000 + PIXI.Ticker.shared.lastTime) % 1000) / 1000.0 * Math.PI)
         this.cross.alpha = v
     }
 

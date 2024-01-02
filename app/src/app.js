@@ -344,7 +344,7 @@ export default class App {
         console.log(PIXI.Ticker)
         console.log(PIXI.Ticker.shared)
         PIXI.Ticker.shared.add(function (_) {
-            var v = Math.sin((PIXI.Ticker.shared.lastTime % 2000) / 2000. * Math.PI)
+            var v = Math.sin((PIXI.Ticker.shared.lastTime % 2000) / 2000.0 * Math.PI)
             searchPrompt.alpha = v
         })
         this.stage.addChild(searchPrompt)
@@ -730,4 +730,3 @@ export default class App {
     }
 }
 
-module.exports = App

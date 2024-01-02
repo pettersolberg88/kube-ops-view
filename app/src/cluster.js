@@ -20,7 +20,7 @@ export default class Cluster extends PIXI.Graphics {
     }
 
     pulsate(_time) {
-        const v = Math.sin((PIXI.Ticker.shared.lastTime % 1000) / 1000. * Math.PI)
+        const v = Math.sin((PIXI.Ticker.shared.lastTime % 1000) / 1000.0 * Math.PI)
         this.alpha = 0.4 + (v * 0.6)
     }
 
