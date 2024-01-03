@@ -150,7 +150,7 @@ export default class App {
         App.current = this
 
         // create the renderer
-        const renderer = PIXI.autoDetectRenderer({autoDensity:true, resolution: 3})
+        const renderer = PIXI.autoDetectRenderer({autoDensity:true, resolution: 2})
         renderer.view.style.display = 'block'
         renderer.autoResize = true
         renderer.resize(window.innerWidth, window.innerHeight)
