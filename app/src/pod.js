@@ -1,3 +1,5 @@
+import {Color} from 'pixi.js'
+
 const PIXI = require('pixi.js')
 import App from './app.js'
 import {FACTORS, getBarColor, podResource} from './utils.js'
@@ -176,7 +178,8 @@ export class Pod extends PIXI.Graphics {
 
     crashing(_time) {
         const v = Math.sin((PIXI.Ticker.shared.lastTime % 1000) / 1000.0 * Math.PI)
-        this.tint = PIXI.utils.rgb2hex([1, v, v])
+        new Color()
+        this.tint = new Color( [ 1, v, v, 1]).toNumber()
     }
 
     terminating(_time) {
@@ -205,7 +208,7 @@ export class Pod extends PIXI.Graphics {
         let newTick = null
 
         const podBox = this
-        podBox.interactive = true
+        podBox.eventMode = 'static'
         podBox.on('mouseover', function () {
             podBox.filters = podBox.filters.filter(x => x != BRIGHTNESS_FILTER).concat([BRIGHTNESS_FILTER])
             let s = this.pod.name

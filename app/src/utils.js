@@ -1,4 +1,4 @@
-const PIXI = require('pixi.js')
+import {Color} from 'pixi.js'
 
 const FACTORS = {
     'n': 1 / 1000000000,
@@ -58,7 +58,7 @@ function hsvToRgb(h, s, v) {
         b = q
         break
     }
-    return PIXI.utils.rgb2hex([r, g, b])
+    return new Color([r, g, b]).toNumber()
 }
 
 function getBarColor(usage, capacity) {

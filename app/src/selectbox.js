@@ -72,9 +72,9 @@ export default class SelectBox extends PIXI.Graphics {
 
         const backArrow = this.backArrow = new PIXI.Graphics()
         const forwardArrow = this.forwardArrow = new PIXI.Graphics()
-        backArrow.interactive = true
+        backArrow.eventMode = 'static'
         backArrow.buttonMode = true
-        forwardArrow.interactive = true
+        forwardArrow.eventMode = 'static'
         forwardArrow.buttonMode = true
 
         // FIXME: hardcoded value for average char width..

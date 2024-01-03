@@ -154,7 +154,7 @@ export default class Cluster extends PIXI.Graphics {
         topHandle.beginFill(App.current.theme.primaryColor, 1)
         topHandle.drawRect(0, 0, width, App.current.heightOfTopHandlePx)
         topHandle.endFill()
-        topHandle.interactive = true
+        topHandle.eventMode = 'static'
         topHandle.buttonMode = true
         const that = this
         topHandle.on('click', function(_event) {

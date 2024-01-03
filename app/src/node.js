@@ -84,7 +84,7 @@ export class Node extends PIXI.Graphics {
         nodeBox.drawRect(0, 0, this.widthOfNodePx, this.heightOfNodePx)
         nodeBox.endFill()
         nodeBox.lineStyle(2, 0xaaaaaa, 1)
-        topHandle.interactive = true
+        topHandle.eventMode = 'static'
         topHandle.on('mouseover', function () {
             let s = nodeBox.node.name
             s += '\nLabels:'

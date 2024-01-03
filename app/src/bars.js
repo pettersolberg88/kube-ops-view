@@ -23,7 +23,7 @@ export default class Bars extends PIXI.Graphics {
 
         // CPU
         const cpuHeight = barHeightPx / bars.resources.cpu.capacity
-        bars.interactive = true
+        bars.eventMode = 'static'
         bars.lineStyle(0, 0xaaffaa, 1)
         bars.beginFill(getBarColor(bars.resources.cpu.requested, bars.resources.cpu.capacity - bars.resources.cpu.reserved), 1)
         bars.drawRect(5, heightOfNodeWoPaddingPx - (bars.resources.cpu.requested + bars.resources.cpu.reserved) * cpuHeight, 2.5, (bars.resources.cpu.requested + bars.resources.cpu.reserved) * cpuHeight)

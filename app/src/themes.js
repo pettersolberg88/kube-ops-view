@@ -1,5 +1,4 @@
 const PIXI = require('pixi.js')
-import {CRTFilter} from '@pixi/filter-crt'
 
 export const ALL_THEMES = {}
 
@@ -55,7 +54,7 @@ class BlackAndWhiteTheme extends DefaultTheme {
         this.secondaryColor = 0x000000
     }
     apply(stage) {
-        const filter = new PIXI.filters.ColorMatrixFilter()
+        const filter = new PIXI.ColorMatrixFilter()
         filter.blackAndWhite()
         stage.filters = [filter]
     }
@@ -68,7 +67,7 @@ class SepiaTheme extends DefaultTheme {
         this.name = 'sepia'
     }
     apply(stage) {
-        const filter = new PIXI.filters.ColorMatrixFilter()
+        const filter = new PIXI.ColorMatrixFilter()
         filter.sepia()
         stage.filters = [filter]
     }
@@ -81,7 +80,7 @@ class PolaroidTheme extends DefaultTheme {
         this.name = 'polaroid'
     }
     apply(stage) {
-        const filter = new PIXI.filters.ColorMatrixFilter()
+        const filter = new PIXI.ColorMatrixFilter()
         filter.polaroid()
         stage.filters = [filter]
     }
@@ -96,31 +95,9 @@ class HighContrastTheme extends DefaultTheme {
         this.secondaryColor = 0x000000
     }
     apply(stage) {
-        const filter = new PIXI.filters.ColorMatrixFilter()
+        const filter = new PIXI.ColorMatrixFilter()
         filter.saturate(3)
         stage.filters = [filter]
     }
 }
 new HighContrastTheme().register()
-
-class CRTTheme extends DefaultTheme {
-    constructor() {
-        super()
-        this.name = 'crt'
-        this.primaryColor = 0xaaaaff
-        this.secondaryColor = 0x222233
-    }
-    apply(stage) {
-        const filter = new CRTFilter({time: 0.5})
-
-        stage.filters = [filter]
-        this.filter = filter
-        PIXI.Ticker.shared.add(this.animate, this)
-    }
-
-    animate(_delta) {
-        this.filter.seed = Math.random()
-        this.filter.time += 0.5
-    }
-}
-new CRTTheme().register()

@@ -150,8 +150,7 @@ export default class App {
         App.current = this
 
         // create the renderer
-        const noWebGL = this.config.renderer === 'canvas'
-        const renderer = PIXI.autoDetectRenderer(256, 256, {resolution: 2}, noWebGL)
+        const renderer = PIXI.autoDetectRenderer({autoDensity:true, resolution: 3})
         renderer.view.style.display = 'block'
         renderer.autoResize = true
         renderer.resize(window.innerWidth, window.innerHeight)
@@ -288,7 +287,8 @@ export default class App {
         addEventListener('touchend', touchEndHandler.bind(this), false)
 
         const that = this
-        const interactionObj = new PIXI.InteractionData()
+        new PIXI.FederatedMouseEvent()
+        const interactionObj = new PIXI.FederatedMouseEvent()
 
         function getLocalCoordinates(x, y) {
             return interactionObj.getLocalPosition(that.viewContainer, undefined, {x: x, y: y})
@@ -339,10 +339,6 @@ export default class App {
         })
         searchPrompt.x = 26
         searchPrompt.y = 8
-        console.log('PETTER')
-        console.log(PIXI)
-        console.log(PIXI.Ticker)
-        console.log(PIXI.Ticker.shared)
         PIXI.Ticker.shared.add(function (_) {
             var v = Math.sin((PIXI.Ticker.shared.lastTime % 2000) / 2000.0 * Math.PI)
             searchPrompt.alpha = v
@@ -411,7 +407,7 @@ export default class App {
         const pod = new Pod(originalPod.pod, null, this.tooltip)
         pod.draw()
         pod.blendMode = PIXI.BLEND_MODES.ADD
-        pod.interactive = false
+        pod.eventMode = 'auto'
         const targetPosition = globalPosition
         const angle = Math.random() * Math.PI * 2
         const cos = Math.cos(angle)
@@ -453,7 +449,7 @@ export default class App {
         pod.draw()
         pod.blendMode = PIXI.BLEND_MODES.ADD
         const globalCenter = new PIXI.Point(globalPosition.x + pod.width / 2, globalPosition.y + pod.height / 2)
-        const blur = new PIXI.filters.BlurFilter(4)
+        const blur = new PIXI.BlurFilter(4)
         pod.filters = [blur]
         pod.position = globalPosition.clone()
         pod.alpha = 1
